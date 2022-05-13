@@ -6,9 +6,12 @@ use urar;
 
 create table urar(
     sifra int not null primary key auto_increment,
+    ime varchar(50),
+    prezime varchar(50),
+    oib varchar(11),
     djelatnik int not null,
-    osoba int not null,
-    maxsegrta varchar(20)
+    segrt int not null,
+    korisnik int not null
 );
 
 create table sat(
@@ -20,23 +23,20 @@ create table sat(
 
 create table korisnik(
     sifra int not null primary key auto_increment,
-    osoba int not null,
+    ime varchar(50),
+    prezime varchar(50),
+    oib varchar(11),
     tip varchar(20) not null,
     sat int not null
 );
 
 create table segrt(
     sifra int not null primary key auto_increment,
-    osoba int not null,
-    djelatnik int not null,
-    praksa boolean
-);
-
-create table osoba(
-    sifra int not null primary key auto_increment,
     ime varchar(50),
     prezime varchar(50),
-    oib varchar(11)
+    oib varchar(11),
+    djelatnik int not null,
+    praksa boolean
 );
 
  create table djelatnik(
@@ -48,10 +48,9 @@ create table osoba(
 
 
 alter table urar add foreign key (djelatnik) references djelatnik(sifra);
-alter table urar add foreign key (osoba) references osoba(sifra);
+alter table urar add foreign key (segrt) references segrt(sifra);
+alter table urar add foreign key (korisnik) references korisnik(sifra);
 
-alter table korisnik add foreign key (osoba) references	osoba(sifra);
 alter table korisnik add foreign key (sat) references sat(sifra);
 
 alter table segrt add foreign key (djelatnik) references djelatnik(sifra);
-alter table segrt add foreign key (osoba) references osoba(sifra);
