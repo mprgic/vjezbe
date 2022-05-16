@@ -5,25 +5,38 @@ create database uljepsavanje;
 use uljepsavanje;
 
 create table salon(
-    velicina varchar(50),
-    kvaliteta varchar(50),
-    skupoca varchar(50)
+    sifra int not null primary key auto_increment,
+    velicina decimal not null,
+    djelatnik int not null,
+    korisnik int not null,
+    usluga int not null
  );
 
  create table djelatnik(
-     kvalifikacija varchar(50),
-     rad varchar(50),
-     iskustvo varchar(50)
+     sifra int not null primary key auto_increment,
+     kvalifikacija varchar(50) not null,
+     rad varchar(50) not null,
+     iskustvo varchar(50) not null,
+     usluga int not null
  );
 
  create table korisnik(
-     ime varchar(50),
-     prezime varchar(50),
+     sifra int not null primary key auto_increment,
+     ime varchar(20),
+     prezime varchar(20),
      email varchar(50)
  );
 
 create table usluga(
+    sifra int not null primary key auto_increment,
     kvaliteta varchar(50),
-    cijena varchar(50),
-    isplativost varchar(50)
+    cijena decimal not null,
+    isplativost varchar(50) not null
 );
+
+
+alter table salon add foreign key (djelatnik) references djelatnik(sifra);
+alter table salon add foreign key (korisnik) references korisnik(sifra);
+alter table salon add foreign key (usluga) references usluga(sifra);
+
+alter table djelatnik add foreign key(usluga) references usluga(sifra);
