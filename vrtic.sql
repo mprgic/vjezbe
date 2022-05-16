@@ -1,4 +1,4 @@
-# C:\xampp\mysql\bin\mysql -uroot < C:\Users\MihaelPrgic\Documents\GitHub\vjezbe\vrtic.sql
+# C:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < C:\Users\MihaelPrgic\Documents\GitHub\vjezbe\vrtic.sql
 
 drop database if exists vrtic;
 create database vrtic;

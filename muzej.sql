@@ -1,19 +1,21 @@
-# C:\xampp\mysql\bin\mysql -uroot < C:\Users\MihaelPrgic\Documents\GitHub\vjezbe\muzej.sql
+# C:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < C:\Users\MihaelPrgic\Documents\GitHub\vjezbe\muzej.sql
 
 drop database if exists muzej;
 create database muzej;
 use muzej;
 
 create table izlozba(
-    naziv varchar(50),
-    datumpocetka varchar(50),
-    datumkraja varchar(50),
-    sponzor varchar(50),
-    kustos varchar(50),
-    djelo varchar(50)
+    sifra int not null primary key auto_increment,
+    naziv varchar(50) not null,
+    datumpocetka datetime not null,
+    datumkraja datetime not null,
+    sponzor int not null,
+    kustos int not null,
+    djelo int not null
 );
 
 create table djelo(
+    sifra int not null primary key auto_increment,
     naziv varchar(50),
     umjetnik varchar(50),
     vlasnik varchar(50),
@@ -21,20 +23,25 @@ create table djelo(
 );
 
 create table kustos(
-    iskustvo varchar(50),
+    sifra int not null primary key auto_increment,
+    iskustvo varchar(50) not null,
     ugovor varchar(50),
-    osoba varchar(50)
-);
-
-create table sponzor(
-    novac varchar(50),
-    dolazak varchar(50),
-    osoba varchar(50)
-);
-
-create table osoba(
     ime varchar(50),
     prezime varchar(50),
     oib varchar(50),
     email varchar(50)
 );
+
+create table sponzor(
+    sifra int not null primary key auto_increment,
+    novac int,
+    dolazak datetime,
+    ime varchar(20),
+    prezime varchar(20),
+    oib varchar(11),
+    email varchar(50)
+);
+
+alter table izlozba add foreign key (sponzor) references sponzor(sifra);
+alter table izlozba add foreign key (djelo) references djelo(sifra);
+alter table izlozba add foreign	key (kustos) references kustos(sifra);

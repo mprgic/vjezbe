@@ -1,4 +1,4 @@
-# C:\xampp\mysql\bin\mysql -uroot < C:\Users\MihaelPrgic\Documents\GitHub\vjezbe\uljepsavanje.sql
+# C:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < C:\Users\MihaelPrgic\Documents\GitHub\vjezbe\uljepsavanje.sql
 
 drop database if exists uljepsavanje;
 create database uljepsavanje;
